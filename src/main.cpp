@@ -74,65 +74,65 @@ int main() {
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
     float vertices[] = {
-        -0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f, -0.5f,
-        0.5f, 0.5f, -0.5f,
-        0.5f, 0.5f, -0.5f,
-        -0.5f, 0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f, 0.5f,
-        0.5f, -0.5f, 0.5f,
-        0.5f, 0.5f, 0.5f,
-        0.5f, 0.5f, 0.5f,
-        -0.5f, 0.5f, 0.5f,
-        -0.5f, -0.5f, 0.5f,
-        -0.5f, 0.5f, 0.5f,
-        -0.5f, 0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f, 0.5f,
-        -0.5f, 0.5f, 0.5f,
-        0.5f, 0.5f, 0.5f,
-        0.5f, 0.5f, -0.5f,
-        0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f, 0.5f,
-        0.5f, 0.5f, 0.5f,
-        -0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f, 0.5f,
-        0.5f, -0.5f, 0.5f,
-        -0.5f, -0.5f, 0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, 0.5f, -0.5f,
-        0.5f, 0.5f, -0.5f,
-        0.5f, 0.5f, 0.5f,
-        0.5f, 0.5f, 0.5f,
-        -0.5f, 0.5f, 0.5f,
-        -0.5f, 0.5f, -0.5f
+        // Positions            // Normals
+         -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+         0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+         0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+
+        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+         0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+
+        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+
+         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+         0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+
+        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+         0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+         0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+
+        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+         0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+         0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
     };
 
-    unsigned int indices[] = {
-        0, 1, 3, // first triangle
-        1, 2, 3  // second triangle
-    };
-
-    unsigned int VBO, VAO, EBO;
+    unsigned int VBO, VAO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
     // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
     // Position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+    // Normal attribute
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
     // Color attribute
     //glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
     //glEnableVertexAttribArray(1);
@@ -148,6 +148,21 @@ int main() {
 
     // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
+    glBindVertexArray(0);
+
+    unsigned int VAO_Light;
+    glGenVertexArrays(1, &VAO_Light);
+    
+    glBindVertexArray(VAO_Light);
+
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+    // Position attribute
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    
     glBindVertexArray(0);
 
 
@@ -234,23 +249,28 @@ int main() {
         projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
         // Enable Shader
+        baseShader.use();
+        baseShader.setMat4("view", view);
+        baseShader.setMat4("projection", projection);
+        glm::vec3 lightPos = glm::vec3(1.2f, 1.0f, 2.0f);
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, lightPos);
+        model = glm::scale(model, glm::vec3(0.2f));
+        baseShader.setMat4("model", model);
+        glBindVertexArray(VAO_Light);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+
         lightingShader.use();
         lightingShader.setMat4("view", view);
         lightingShader.setMat4("projection", projection);
 
         glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::mat4(1.0f);
         lightingShader.setMat4("model", model);
         lightingShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
+        lightingShader.setVec3("viewPos", camera.Position);
         lightingShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
-
-        baseShader.use();
-        baseShader.setMat4("view", view);
-        baseShader.setMat4("projection", projection);
-        model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(1.2f, 1.0f, 2.0f));
-        baseShader.setMat4("model", model);
+        lightingShader.setVec3("lightPos", lightPos);
         glDrawArrays(GL_TRIANGLES, 0, 36);
         
         //glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
@@ -266,7 +286,6 @@ int main() {
     // ------------------------------------------------------------------------
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
-    glDeleteBuffers(1, &EBO);
 
     // glfw: terminate, clearing all previously allocated GLFW resources.
     // ------------------------------------------------------------------
