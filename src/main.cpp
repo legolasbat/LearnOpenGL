@@ -177,9 +177,11 @@ int main() {
     unsigned int texture2 = load_texture("Textures/awesomeface.png");
 
     unsigned int textureContainer = load_texture("Textures/container2.png");
+    unsigned int textureContainerSpecular = load_texture("Textures/container2_specular.png");
 
     lightingShader.use();
     lightingShader.setInt("material.diffuse", 0);
+    lightingShader.setInt("material.specular", 1);
 
     // render loop
     // -----------
@@ -199,8 +201,8 @@ int main() {
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, textureContainer);
-        //glActiveTexture(GL_TEXTURE1);
-        //glBindTexture(GL_TEXTURE_2D, texture2);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, textureContainerSpecular);
 
         // create transformations
         glm::mat4 view = camera.GetViewMatrix();
