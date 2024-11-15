@@ -11,6 +11,7 @@
 
 #include "Shader.h"
 #include "Camera.h"
+#include "Model.h"
 
 unsigned int load_texture(const char* path);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -196,6 +197,8 @@ int main() {
     lightingShader.setInt("material.diffuse", 0);
     lightingShader.setInt("material.specular", 1);
 
+    Model backpack("Models/backpack/backpack.obj");
+
     glm::vec3 pointLightPositions[] = {
         glm::vec3(0.7f, 0.2f, 2.0f),
         glm::vec3(2.3f, -3.3f, -4.0f),
@@ -315,8 +318,12 @@ int main() {
             float angle = 20.0f * i;
             model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
             lightingShader.setMat4("model", model);
-            glDrawArrays(GL_TRIANGLES, 0, 36);
+            //glDrawArrays(GL_TRIANGLES, 0, 36);
         }
+        
+        model = glm::mat4(1.0f);
+        lightingShader.setMat4("model", model);
+        backpack.Draw(lightingShader);
         
         //glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
         // glBindVertexArray(0); // no need to unbind it every time
