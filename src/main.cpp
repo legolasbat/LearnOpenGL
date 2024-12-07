@@ -68,10 +68,14 @@ int main() {
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
+    glEnable(GL_STENCIL_TEST);
+    glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 
     // build and compile our shader program
     // ------------------------------------
     Shader litShader("Shaders/textureLitShader.vs", "Shaders/textureLitShader.fs");
+    Shader colorShader("Shaders/textureLitShader.vs", "Shaders/colorShader.fs");
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -205,7 +209,7 @@ int main() {
         // render
         // ------
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
         // create transformations
         glm::mat4 model = glm::mat4(1.0f);
@@ -215,10 +219,24 @@ int main() {
         projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
         // Enable Shader
+        colorShader.use();
+        colorShader.setMat4("view", view);
+        colorShader.setMat4("projection", projection);
         litShader.use();
         litShader.setMat4("view", view);
         litShader.setMat4("projection", projection);
 
+        // floor
+        glStencilMask(0x00); // We set its mask to 0x00 to not write to the stencil buffer.
+        glBindVertexArray(planeVAO);
+        glBindTexture(GL_TEXTURE_2D, floorTexture);
+        litShader.setMat4("model", glm::mat4(1.0f));
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+        glBindVertexArray(0);
+        
+        // Write to stencil buffer
+        glStencilFunc(GL_ALWAYS, 1, 0xFF);
+        glStencilMask(0xFF);
         // Cubes
         glBindVertexArray(cubeVAO);
         glActiveTexture(GL_TEXTURE0);
@@ -230,12 +248,34 @@ int main() {
         model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
         litShader.setMat4("model", model);
         glDrawArrays(GL_TRIANGLES, 0, 36);
-        // floor
-        glBindVertexArray(planeVAO);
-        glBindTexture(GL_TEXTURE_2D, floorTexture);
-        litShader.setMat4("model", glm::mat4(1.0f));
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+
+        // Disable stencil writing
+        // Because the stencil buffer is now filled with several 1s. The parts of the buffer that are 1 are not drawn, thus only drawing 
+        // the objects' size differences, making it look like borders.
+        glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+        glStencilMask(0x00);
+        glDisable(GL_DEPTH_TEST);
+        colorShader.use();
+        float scale = 1.1f;
+        // Cubes
+        glBindVertexArray(cubeVAO);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, cubeTexture);
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
+        model = glm::scale(model, glm::vec3(scale, scale, scale));
+        colorShader.setMat4("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(scale, scale, scale));
+        colorShader.setMat4("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+
         glBindVertexArray(0);
+        glStencilMask(0xFF);
+        glStencilFunc(GL_ALWAYS, 0, 0xFF);
+        glEnable(GL_DEPTH_TEST);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
